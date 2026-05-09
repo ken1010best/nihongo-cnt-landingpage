@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>7日間で変わる日本語リセット — Alice in Japan</title>
+<meta name="description" content="N1に4回落ちた私が、5回目で合格した理由。7日間イマージョン・チャレンジ。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet"/>
+
+<style>
+/* ── Reset & Base ───────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:        #07070F;
+  --bg2:       #0F0F1E;
+  --bg3:       #151528;
+  --panel:     #1A1A30;
+  --violet:    #6C63FF;
+  --violet-l:  #9B8EC4;
+  --violet-ll: #C3B8E8;
+  --crimson:   #C0392B;
+  --gold:      #F0C040;
+  --sakura:    #FF8FAB;
+  --white:     #FFFFFF;
+  --off:       #EEF0FF;
+  --muted:     #7A7A9A;
+  --serif-jp:  'Noto Serif JP', serif;
+  --sans-jp:   'Noto Sans JP', sans-serif;
+  --serif-en:  'Cormorant Garamond', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--off);
+  font-family: var(--sans-jp);
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── Grain overlay ──────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ── Typography ─────────────────────────────────── */
+.jp { font-family: var(--serif-jp); }
+.en { font-family: var(--serif-en); }
+.en-sub { font-family: var(--serif-en); font-style: italic; color: var(--muted); font-size: 0.88em; }
+
+/* ── Nav ────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.2rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(108,99,255,0.12);
+  backdrop-filter: blur(20px);
+  background: rgba(7,7,15,0.75);
+}
+.nav-brand {
+  font-family: var(--serif-en);
+  font-size: 1.1rem;
+  color: var(--violet-l);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.nav-cta {
+  background: var(--crimson);
+  color: var(--white);
+  padding: 0.5rem 1.4rem;
+  border-radius: 2px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── Hero ───────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding: 8rem 2rem 5rem;
+  overflow: hidden;
+}
+
+/* Big "7" watermark */
+.hero::before {
+  content: '7';
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--serif-en);
+  font-size: clamp(28rem, 55vw, 60rem);
+  font-weight: 600;
+  color: rgba(108,99,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Gradient aura */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(108,99,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 860px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: rgba(108,99,255,0.18);
+  border: 1px solid rgba(108,99,255,0.4);
+  color: var(--violet-ll);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+  font-family: var(--sans-jp);
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-title {
+  font-family: var(--serif-jp);
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+
+.hero-title-en {
+  font-family: var(--serif-en);
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--violet-ll);
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--crimson);
+  margin-bottom: 2rem;
+  animation: expandW 0.8s 0.3s ease both;
+}
+
+.hero-hook {
+  font-family: var(--serif-jp);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 400;
+  color: var(--off);
+  line-height: 1.9;
+  margin-bottom: 0.8rem;
+  animation: fadeUp 0.8s 0.35s ease both;
+}
+.hero-hook-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.hero-cta-group {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.55s ease both;
+}
+
+.btn-primary {
+  background: var(--crimson);
+  color: var(--white);
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--serif-jp);
+  text-decoration: none;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(192,57,43,0.3);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(192,57,43,0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--violet-ll);
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  font-family: var(--serif-en);
+  font-style: italic;
+  text-decoration: none;
+  border: 1px solid rgba(155,142,196,0.3);
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--violet-l);
+  color: var(--white);
+}
+
+.hero-price {
+  margin-top: 1.2rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  animation: fadeUp 0.8s 0.65s ease both;
+}
+.hero-price strong { color: var(--gold); }
+
+/* ── Day dots ───────────────────────────────────── */
+.day-dots {
+  display: flex; gap: 0.6rem; margin-top: 2.5rem;
+  animation: fadeUp 0.8s 0.7s ease both;
+}
+.dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.7rem; font-weight: 700; color: var(--white);
+}
+
+/* ── Section base ───────────────────────────────── */
+section {
+  padding: 6rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+section.full-width {
+  max-width: 100%;
+  padding-left: 0; padding-right: 0;
+}
+
+.section-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--violet-l);
+  margin-bottom: 1rem;
+  font-family: var(--sans-jp);
+}
+
+.section-title {
+  font-family: var(--serif-jp);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+.section-title-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Story section ──────────────────────────────── */
+.story-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  border-top: 1px solid rgba(108,99,255,0.1);
+  border-bottom: 1px solid rgba(108,99,255,0.1);
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (max-width: 700px) { .story-grid { grid-template-columns: 1fr; } }
+
+.story-timeline {
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.timeline-item {
+  display: flex; gap: 1.2rem; position: relative;
+}
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 14px; top: 32px;
+  width: 2px; bottom: -1px;
+  background: rgba(108,99,255,0.2);
+}
+
+.t-dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  flex-shrink: 0; display: grid; place-items: center;
+  font-size: 0.72rem; font-weight: 700;
+  position: relative; z-index: 1;
+}
+.t-dot.pass { background: var(--violet); }
+.t-dot.fail { background: rgba(192,57,43,0.3); border: 1px solid var(--crimson); color: var(--crimson); }
+.t-dot.start { background: var(--bg3); border: 1px solid var(--violet-l); color: var(--violet-l); }
+
+.t-content { padding-bottom: 2rem; }
+.t-year { font-size: 0.75rem; color: var(--violet-l); font-weight: 700; letter-spacing: 0.1em; }
+.t-text { font-family: var(--serif-jp); font-size: 0.95rem; color: var(--off); margin-top: 0.2rem; }
+.t-sub { font-family: var(--serif-en); font-style: italic; font-size: 0.82rem; color: var(--muted); }
+
+.story-quote {
+  background: var(--panel);
+  border-left: 3px solid var(--violet);
+  padding: 2rem 2rem;
+}
+.story-quote blockquote {
+  font-family: var(--serif-jp);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.story-quote .translation {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--gold);
+  font-size: 1rem;
+}
+.story-body {
+  margin-top: 1.5rem;
+  font-family: var(--serif-jp);
+  font-size: 0.95rem;
+  color: var(--violet-ll);
+  line-height: 1.9;
+}
+.story-body-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+/* ── 7 Days overview ────────────────────────────── */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1px;
+  background: rgba(108,99,255,0.1);
+  border: 1px solid rgba(108,99,255,0.1);
+}
+
+.day-card {
+  background: var(--bg2);
+  padding: 1.8rem 1.5rem;
+  transition: background 0.25s;
+  cursor: default;
+}
+.day-card:hover { background: var(--panel); }
+
+.day-num {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+.day-title-jp {
+  font-family: var(--serif-jp);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+.day-title-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.day-action {
+  font-size: 0.82rem;
+  color: var(--violet-ll);
+  line-height: 1.6;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(108,99,255,0.15);
+}
+
+/* ── What you get ───────────────────────────────── */
+.gets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+@media (max-width: 600px) { .gets-grid { grid-template-columns: 1fr; } }
+
+.get-item {
+  background: var(--bg2);
+  border: 1px solid rgba(108,99,255,0.12);
+  padding: 1.5rem;
+  border-radius: 2px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.get-item:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-3px); }
+.get-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+.get-title { font-family: var(--serif-jp); font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+.get-title-en { font-family: var(--serif-en); font-style: italic; font-size: 0.82rem; color: var(--muted); margin-bottom: 0.8rem; }
+.get-desc { font-size: 0.85rem; color: var(--violet-ll); line-height: 1.7; }
+
+/* ── For who ────────────────────────────────────── */
+.for-section { background: var(--bg2); }
+
+.for-list {
+  display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem;
+}
+.for-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.2rem 1.5rem;
+  background: var(--panel);
+  border-left: 3px solid var(--violet);
+}
+.for-check { color: var(--violet); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.for-text { font-family: var(--serif-jp); font-size: 0.95rem; color: var(--off); }
+.for-text-en { font-family: var(--serif-en); font-style: italic; font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* ── Big quote ──────────────────────────────────── */
+.quote-section {
+  text-align: center;
+  padding: 7rem 2rem;
+  background: radial-gradient(ellipse at center, rgba(108,99,255,0.06) 0%, transparent 70%);
+  border-top: 1px solid rgba(108,99,255,0.08);
+  border-bottom: 1px solid rgba(108,99,255,0.08);
+}
+
+.big-quote {
+  font-family: var(--serif-jp);
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 1rem;
+}
+.big-quote-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--gold);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── CTA section ────────────────────────────────── */
+.cta-section {
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(108,99,255,0.04) 50%, var(--bg) 100%);
+  text-align: center;
+  padding: 7rem 2rem;
+}
+
+.cta-title {
+  font-family: var(--serif-jp);
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+.cta-sub {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+.cta-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--panel);
+  border: 1px solid rgba(108,99,255,0.25);
+  padding: 3rem 4rem;
+  max-width: 500px;
+  width: 100%;
+}
+@media (max-width: 560px) { .cta-card { padding: 2rem 1.5rem; } }
+
+.cta-product-name {
+  font-family: var(--serif-jp);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.cta-product-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--violet-ll);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+.cta-price {
+  font-family: var(--serif-en);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+.cta-price span { font-size: 1rem; color: var(--muted); }
+
+.cta-includes {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  text-align: left; width: 100%;
+}
+.cta-include-item {
+  font-size: 0.85rem;
+  color: var(--violet-ll);
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.cta-include-item::before {
+  content: '✓';
+  color: var(--violet);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.btn-buy {
+  width: 100%;
+  background: var(--crimson);
+  color: var(--white);
+  padding: 1.1rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: var(--serif-jp);
+  text-decoration: none;
+  border-radius: 2px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(192,57,43,0.35);
+  display: block;
+}
+.btn-buy:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(192,57,43,0.45); }
+
+.btn-buy-amazon {
+  width: 100%;
+  background: transparent;
+  color: var(--off);
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  font-family: var(--sans-jp);
+  text-decoration: none;
+  border: 1px solid rgba(240,192,64,0.3);
+  border-radius: 2px;
+  text-align: center;
+  transition: border-color 0.2s, color 0.2s;
+  display: block;
+}
+.btn-buy-amazon:hover { border-color: var(--gold); color: var(--gold); }
+
+.cta-guarantee {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-family: var(--serif-en);
+  font-style: italic;
+}
+
+/* ── Footer ─────────────────────────────────────── */
+footer {
+  border-top: 1px solid rgba(108,99,255,0.1);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.footer-brand {
+  font-family: var(--serif-en);
+  font-size: 1.1rem;
+  color: var(--violet-l);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.footer-sub {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ── Sakura petals ──────────────────────────────── */
+.petal {
+  position: fixed;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,143,171,0.3);
+  pointer-events: none;
+  animation: drift linear infinite;
+  z-index: 0;
+}
+
+/* ── Animations ─────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes expandW {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+@keyframes drift {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- Petals -->
+<div class="petal" style="left:10%;animation-duration:12s;animation-delay:0s;top:-5px;"></div>
+<div class="petal" style="left:25%;animation-duration:9s;animation-delay:3s;top:-5px;width:4px;height:4px;"></div>
+<div class="petal" style="left:60%;animation-duration:14s;animation-delay:1s;top:-5px;"></div>
+<div class="petal" style="left:80%;animation-duration:11s;animation-delay:5s;top:-5px;width:5px;height:5px;"></div>
+<div class="petal" style="left:45%;animation-duration:16s;animation-delay:7s;top:-5px;width:3px;height:3px;"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-brand">Alice in Japan</a>
+  <a href="#cta" class="nav-cta">今すぐ読む / Get it now</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Alice in Japan Series · N1 Immersion Challenge</div>
+    <h1 class="hero-title jp">7日間で変わる<br/>日本語リセット</h1>
+    <p class="hero-title-en en">7-Day Japanese Reset</p>
+    <div class="hero-divider"></div>
+    <p class="hero-hook jp">
+      N1に4回落ちた私が、5回目で合格した理由。<br/>
+      それは「もっと勉強した」からではなかった。
+    </p>
+    <p class="hero-hook-en en">
+      I failed N1 four times. Then I passed — not by studying more,<br/>but by learning differently.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#cta" class="btn-primary">今すぐ読む / Get the book</a>
+      <a href="#days" class="btn-secondary">7日間の内容を見る →</a>
+    </div>
+    <p class="hero-price">
+      Kindle版 <strong>¥680</strong><span style="font-size:0.78em;color:var(--muted);"> 税込</span> · Amazon.co.jp &nbsp;|&nbsp; <strong>$4.99</strong> · Amazon.com
+    </p>
+    <div class="day-dots">
+      <div class="dot" style="background:#C0392B;">1</div>
+      <div class="dot" style="background:#8E44AD;">2</div>
+      <div class="dot" style="background:#2471A3;">3</div>
+      <div class="dot" style="background:#117A65;">4</div>
+      <div class="dot" style="background:#B7770D;">5</div>
+      <div class="dot" style="background:#1A5276;">6</div>
+      <div class="dot" style="background:#922B21;">7</div>
+    </div>
+  </div>
+</div>
+
+<!-- Story -->
+<div class="story-section full-width">
+  <section class="reveal">
+    <p class="section-tag">著者の話 / Author's Story</p>
+    <h2 class="section-title jp">15年かけて気づいたこと。</h2>
+    <p class="section-title-en en">What 15 years finally taught me.</p>
+
+    <div class="story-grid">
+      <div class="story-timeline">
+        <div class="timeline-item">
+          <div class="t-dot start">▶</div>
+          <div class="t-content">
+            <div class="t-year">2006</div>
+            <div class="t-text jp">日本語学習を開始</div>
+            <div class="t-sub en">Started learning Japanese</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-dot fail">✗</div>
+          <div class="t-content">
+            <div class="t-year">2010年代</div>
+            <div class="t-text jp">文法を詰め込む。N1に落ち続ける。<br/>ベトナムで2回、日本で2回。</div>
+            <div class="t-sub en">Grammar drilling. Failed N1 × 4.<br/>Twice in Vietnam. Twice in Japan.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-dot start" style="border-color:var(--gold);color:var(--gold);">!</div>
+          <div class="t-content">
+            <div class="t-year">転機 / Turning point</div>
+            <div class="t-text jp">教科書を閉じた。<br/>好きな分野の日本語を毎日読み始めた。</div>
+            <div class="t-sub en">Closed the textbook.<br/>Started reading Japanese about what I loved.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-dot pass">✓</div>
+          <div class="t-content">
+            <div class="t-year">2021年12月</div>
+            <div class="t-text jp" style="color:var(--gold);">N1 — 合格。</div>
+            <div class="t-sub en">JLPT N1 — Passed.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-quote">
+        <blockquote class="jp">「教科書を閉じてから、<br/>受かりました。」</blockquote>
+        <p class="translation en">"I passed after closing the textbook."</p>
+        <p class="story-body jp">もっと勉強したからではない。<br/>学び方を変えたからだ。</p>
+        <p class="story-body-en en">Not because I studied more.<br/>Because I learned differently.</p>
+        <p class="story-body jp" style="margin-top:1.2rem;">この7日間チャレンジは、私が10年前に持っていればよかった本だ。</p>
+        <p class="story-body-en en">This 7-day challenge is the book I wish I had 10 years earlier.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 7 Days -->
+<div id="days" style="background:var(--bg);">
+  <section class="reveal" style="max-width:960px;">
+    <p class="section-tag">7日間チャレンジ / The 7-Day Challenge</p>
+    <h2 class="section-title jp">1日1つのアクション。</h2>
+    <p class="section-title-en en">One focused action per day. No textbooks.</p>
+  </section>
+
+  <div class="days-grid" style="max-width:960px;margin:0 auto 6rem;">
+    <div class="day-card reveal">
+      <div class="day-num" style="color:#C0392B;">DAY 1</div>
+      <div class="day-title-jp jp">教科書を閉じる</div>
+      <div class="day-title-en en">Close the Textbook</div>
+      <div class="day-action">N1は「速さ」と「自然さ」を測る。ルールの暗記ではない。<br/><em style="font-size:0.8em;color:var(--muted);">N1 tests speed & naturalness, not rule recall.</em></div>
+    </div>
+    <div class="day-card reveal">
+      <div class="day-num" style="color:#8E44AD;">DAY 2</div>
+      <div class="day-title-jp jp">あなたの日本語を見つける</div>
+      <div class="day-title-en en">Find Your Japanese</div>
+      <div class="day-action">興味があるテーマの日本語を読む。好きなことが最高の先生になる。<br/><em style="font-size:0.8em;color:var(--muted);">Your passion becomes your teacher.</em></div>
+    </div>
+    <div class="day-card reveal">
+      <div class="day-num" style="color:#2471A3;">DAY 3</div>
+      <div class="day-title-jp jp">朝の20分</div>
+      <div class="day-title-en en">The 20-Min Morning</div>
+      <div class="day-action">スマホより先にヘッドフォン。朝の脳に日本語を流し込む。<br/><em style="font-size:0.8em;color:var(--muted);">Before your phone. 20 minutes of Japanese audio.</em></div>
+    </div>
+    <div class="day-card reveal">
+      <div class="day-num" style="color:#117A65;">DAY 4</div>
+      <div class="day-title-jp jp">ネイティブのように読む</div>
+      <div class="day-title-en en">Read Like a Native</div>
+      <div class="day-action">辞書なし。最初から最後まで読む。リズムを感じる。<br/><em style="font-size:0.8em;color:var(--muted);">No dictionary. Full email. Feel the rhythm.</em></div>
+    </div>
+    <div class="day-card reveal">
+      <div class="day-num" style="color:#B7770D;">DAY 5</div>
+      <div class="day-title-jp jp">字幕なしで見る</div>
+      <div class="day-title-en en">Watch Without Subtitles</div>
+      <div class="day-action">耳もトレーニングが必要だ。字幕なしで1本。<br/><em style="font-size:0.8em;color:var(--muted);">Your ears need training too. 1 video, no subtitles.</em></div>
+    </div>
+    <div class="day-card reveal">
+      <div class="day-num" style="color:#1A5276;">DAY 6</div>
+      <div class="day-title-jp jp">振り返りの日</div>
+      <div class="day-title-en en">The Reflection Day</div>
+      <div class="day-action">新しいインプットなし。5日間が脳に何をしたかを感じる日。<br/><em style="font-size:0.8em;color:var(--muted);">No new input. Notice what changed in 5 days.</em></div>
+    </div>
+    <div class="day-card reveal" style="grid-column:1/-1;max-width:calc(100%/3);margin:0 auto;" >
+      <div class="day-num" style="color:#922B21;">DAY 7</div>
+      <div class="day-title-jp jp">決して止まらない</div>
+      <div class="day-title-en en">Never Stop</div>
+      <div class="day-action">第7日は終わりではない。N1への日常習慣を設計する日。<br/><em style="font-size:0.8em;color:var(--muted);">Day 7 is not the end. Design your forever routine.</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- What you get -->
+<div style="background:var(--bg2);border-top:1px solid rgba(108,99,255,0.1);">
+  <section class="reveal">
+    <p class="section-tag">含まれるもの / What's Inside</p>
+    <h2 class="section-title jp">本の中身</h2>
+    <p class="section-title-en en">What's in the book</p>
+
+    <div class="gets-grid">
+      <div class="get-item">
+        <div class="get-icon">📖</div>
+        <div class="get-title jp">著者の実話</div>
+        <div class="get-title-en en">The real story</div>
+        <div class="get-desc">2006年から2021年まで。4回の失敗と、5回目の合格。すべて実話。<br/><em style="font-size:0.88em;color:var(--muted);">2006 to 2021. 4 failures, 1 pass. All true.</em></div>
+      </div>
+      <div class="get-item">
+        <div class="get-icon">⚡</div>
+        <div class="get-title jp">1日1つのアクション</div>
+        <div class="get-title-en en">One action per day</div>
+        <div class="get-desc">読んですぐ実践できる。毎日20〜30分あれば十分。<br/><em style="font-size:0.88em;color:var(--muted);">Actionable. 20-30 minutes a day is enough.</em></div>
+      </div>
+      <div class="get-item">
+        <div class="get-icon">✍️</div>
+        <div class="get-title jp">振り返りプロンプト</div>
+        <div class="get-title-en en">Reflection prompts</div>
+        <div class="get-desc">各日の質問に書き込みながら進める。ワークブックとしても使える。<br/><em style="font-size:0.88em;color:var(--muted);">Write-in questions for each day. Works as a workbook.</em></div>
+      </div>
+      <div class="get-item">
+        <div class="get-icon">🌸</div>
+        <div class="get-title jp">日英バイリンガル</div>
+        <div class="get-title-en en">Bilingual JP + EN</div>
+        <div class="get-desc">日本語メインで英語訳付き。海外からも読める。<br/><em style="font-size:0.88em;color:var(--muted);">Japanese primary with English translation throughout.</em></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- For who -->
+<div class="for-section full-width">
+  <section class="reveal">
+    <p class="section-tag">対象読者 / Who This Is For</p>
+    <h2 class="section-title jp">こんな方に。</h2>
+    <p class="section-title-en en">This book is for you if...</p>
+
+    <div class="for-list">
+      <div class="for-item">
+        <span class="for-check">✓</span>
+        <div>
+          <div class="for-text jp">N1に何度も落ちて、何を変えればいいかわからない</div>
+          <div class="for-text-en en">You've failed N1 multiple times and don't know what to change</div>
+        </div>
+      </div>
+      <div class="for-item">
+        <span class="for-check">✓</span>
+        <div>
+          <div class="for-text jp">文法は知っているのに、リスニングで止まってしまう</div>
+          <div class="for-text-en en">You know the grammar but freeze when someone speaks real Japanese</div>
+        </div>
+      </div>
+      <div class="for-item">
+        <span class="for-check">✓</span>
+        <div>
+          <div class="for-text jp">仕事が忙しくて、毎日3時間も勉強できない</div>
+          <div class="for-text-en en">You're too busy to study 3 hours a day — but you can do 20 minutes</div>
+        </div>
+      </div>
+      <div class="for-item">
+        <span class="for-check">✓</span>
+        <div>
+          <div class="for-text jp">教科書に疲れた。もっと自然な方法で学びたい</div>
+          <div class="for-text-en en">You're tired of textbooks and want a more natural approach</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Big quote -->
+<div class="quote-section full-width reveal">
+  <p class="big-quote jp">
+    「わからなくても、<br/>毎日触れていれば、<br/>ある日突然わかるようになる。」
+  </p>
+  <p class="big-quote-en en" style="margin-top:1.5rem;">
+    "Even if you don't understand — if you touch it every day,<br/>one day you'll suddenly understand."
+  </p>
+</div>
+
+<!-- CTA -->
+<div id="cta" class="cta-section full-width reveal">
+  <section style="max-width:600px;">
+    <p class="section-tag" style="text-align:center;">今すぐ始める / Start Today</p>
+    <h2 class="cta-title jp">あなたなら、きっと大丈夫。</h2>
+    <p class="cta-sub en">"You've got this."</p>
+
+    <div style="display:flex;justify-content:center;">
+      <div class="cta-card">
+        <div>
+          <div class="cta-product-name jp">7日間で変わる日本語リセット</div>
+          <div class="cta-product-en en">7-Day Japanese Reset — Alice in Japan</div>
+        </div>
+
+        <div class="cta-price">¥680 <span>税込 / $4.99</span></div>
+
+        <div class="cta-includes">
+          <div class="cta-include-item">全7章 + はじめに + おわりに</div>
+          <div class="cta-include-item">各日の振り返りプロンプト付き</div>
+          <div class="cta-include-item">日英バイリンガル全文</div>
+          <div class="cta-include-item">Kindle Unlimited 対応</div>
+          <div class="cta-include-item">Alice in Japan Series Vol.4</div>
+        </div>
+
+        <div style="width:100%;display:flex;flex-direction:column;gap:0.8rem;">
+          <a href="https://www.amazon.co.jp" class="btn-buy">Amazon.co.jp で読む →</a>
+          <a href="https://www.amazon.com" class="btn-buy-amazon">Amazon.com (English) →</a>
+        </div>
+
+        <p class="cta-guarantee">Kindle Unlimited会員は無料 · Free with Kindle Unlimited</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-brand">Alice in Japan</div>
+  <p class="footer-sub en">From Tokyo memories to freelancer life · 2006 → 2021 → You</p>
+  <p style="margin-top:1.5rem;font-size:0.75rem;color:rgba(122,122,154,0.5);">
+    © Alice in Japan · All rights reserved
+  </p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Day 7 card mobile fix
+const day7 = document.querySelector('.days-grid .day-card:last-child');
+if (window.innerWidth <= 600 && day7) {
+  day7.style.gridColumn = '1';
+  day7.style.maxWidth = '100%';
+  day7.style.margin = '0';
+}
+</script>
+</body>
+</html>
